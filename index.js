@@ -1,9 +1,9 @@
 import express from 'express';
-
+import router from './users.js';
+import routere from './routes/grades.js';
+import db from './db/conn.js';
 const PORT = 5050;
 const app = express();
-
-import grades from './routes/grades.js';
 
 app.use(express.json());
 
@@ -11,7 +11,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the API.");
 });
 
-app.use("/grades", grades);
+app.use("/grades", routere);
+app.use("/users", router);
 
 // Global error handling
 app.use((err, _req, res, next) => {
