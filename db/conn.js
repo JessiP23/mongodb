@@ -1,17 +1,16 @@
-import { MongoClient, MongoGridFSChunkError } from "mongodb";
-import dotenv from 'dotenv';
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 dotenv.config();
 
 const client = new MongoClient(process.env.ATLAS_URI);
 
 let conn;
-
 try {
-    conn = awai client.connect();
+  conn = await client.connect();
 } catch (e) {
-    console.log(e);
+  console.error(e);
 }
 
-const db = conn.db('sample_training');
+let db = conn.db("sample_training");
 
 export default db;

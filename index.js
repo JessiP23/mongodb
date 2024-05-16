@@ -1,32 +1,24 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import gradesRouter from "./routes/grades.js";
+import express from "express";
 
-//inits the dotenv package
-dotenv.config();
-
-const PORT = process.env.PORT || 4000;
-
+const PORT = 5050;
 const app = express();
+
+import grades from "./routes/grades.mjs";
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-    console.log('Request from url: ' + req.url);
-    next();
+app.get("/", (req, res) => {
+  res.send("Welcome to the API.");
 });
 
-app.get('/', (req, res) => {
-    console.log(req.body);
-    res.send('Welcome to the API');
-});
+app.use("/grades", grades);
 
-app.use('/grades', gradesRouter);
-
+// Global error handling
 app.use((err, _req, res, next) => {
-    res.status(500).send('Server Error!');
+  res.status(500).send("Seems like we messed up somewhere...");
 });
 
+// Start the Express server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port: ${PORT}`);
 });
