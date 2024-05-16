@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 
 const PORT = 5050;
 const app = express();
 
-import grades from "./routes/grades.mjs";
+import grades from './routes/grades.js';
 
 app.use(express.json());
 
