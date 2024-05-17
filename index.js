@@ -8,6 +8,10 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
+    if (res.headersSent) {
+        return res.send(403).send("Headers have already been sent");
+    }
+
   res.send("Welcome to the API.");
 });
 
